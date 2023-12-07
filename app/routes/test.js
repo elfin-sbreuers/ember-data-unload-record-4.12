@@ -9,16 +9,28 @@ export default class TestRoute extends Route {
         {
           id: '1',
           type: 'foo',
-          relationships: { bars: { data: [{ id: '1', type: 'bar' }] } },
+          relationships: {
+              bar: { data: { id: '1', type: 'bar' } },
+          },
         },
-        /*{
+        {
+          id: '1',
+          type: 'baz',
+          relationships: {
+              bars: { data: [{ id: '1', type: 'bar' }] },
+          },
+        }
+        /*,{
           id: '1',
           type: 'bar',
-          relationships: { foos: { data: [{ id: '1', type: 'foo' }] } },
-        }*/,
+          relationships: {
+              foos: { data: [{ id: '1', type: 'foo' }] },
+              fazs: { data: [{ id: '1', type: 'faz' }] }
+          },
+        }*/
       ],
     });
-    ['foo', 'bar'].forEach((modelName) => this.store.unloadAll(modelName));
+    ['foo', 'bar', 'baz'].forEach((modelName) => this.store.unloadAll(modelName));
     return this.store.peekAll('foo');
   }
 }
